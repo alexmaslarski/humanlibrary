@@ -1,0 +1,122 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+$backgroundColor: linear-gradient(#ffffff, #eeeeee);
+$buttonBackground: linear-gradient(90deg, #FFDC8D, #60FFDA);
+$mainTextColor: #000000;
+$secondaryTextColor: #707070;
+
+body {
+    background-image: $backgroundColor;
+    color: $mainTextColor;
+    font-family: mostra-nuova, sans-serif;
+    font-size: 18px;
+    min-height: 100vh;
+}
+header{
+    h1{
+        text-align: center;
+        font-size: 2em;
+        color: $secondaryTextColor;
+        font-weight: 100;
+    }
+}
+
+.content-wrapper {
+    width: 90%;
+    margin: 0 auto;
+   
+}
+section{
+    padding: 20px 0;
+}
+#content-display {
+    width: 100%;
+    display: flex;
+    > div{
+        width: 50%;
+    }
+}
+
+#hero-image {
+    text-align: center;
+
+    img {
+        width: 80%;
+        box-shadow: -20px 20px 0px #FFCE84;
+    }
+
+}
+#hero-content{
+    h2{
+        font-weight: 100;
+        font-size: 2em;
+        color: $secondaryTextColor;
+    }
+    span{
+        font-weight: bold;
+    }
+    .buttons-wrapper{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 30px;
+        a{
+            color: black;
+            text-decoration: none;
+            
+            padding: 10px 70px;
+            border-radius: 50px;
+            background-image: $buttonBackground;
+            transition: .2s;
+            filter: opacity(.7);
+            i{
+                font-size: 1.5em;
+            }
+            &:hover{
+                // background-image: linear-gradient(90deg, rgb(255, 208, 100), rgb(50, 255, 207));
+                filter: opacity(1);
+                color: red;
+                transition: .2s;
+            }
+        }
+    }
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px;
+}
+
+.grid-person {
+    position: relative;
+
+    img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        box-shadow: 3px 0 6px rgba(0, 0, 0, 0.15);
+    }
+
+    h4 {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        color: white;
+        padding: 5px;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.2);
+
+    }
+}
+
+footer{
+    text-align: center;
+    p{
+        font-size: 3em;
+    }
+}
