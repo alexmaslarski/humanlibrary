@@ -16,84 +16,81 @@
         <h1>Human Library</h1>
     </header>
     <main>
+        <div id="contact-wrapper"></div>
+
+
+
         <article class="content-wrapper">
 
 
             <section id="content-display">
-                <div id="hero-image">
+                <div id="banner">
 
-                    <img src="img/selena-full.PNG" alt="">
+                    <img src="img/default-banner.jpg" alt="">
                 </div>
-                <div id="hero-content">
-                    <h2>Trans Female</h2>
-                    <div class="hero-story">
-                        <p><span>Name:</span> Selena</p>
-                        <p><span>Age:</span> 22</p>
-                        <p><span>Gender:</span> Trans Female</p>
-                        <p><span>Sexuality:</span> Homosexual</p>
-                        <br>
-                        <p><span>Interests:</span> Metal music, D&D, and social life</p>
-                        <br>
-                        <p><span>Realisation:</span> .</p>
-                        <p><span>Coming Out:</span> .</p>
-                        <p><span>Response:</span> .</p>
-                        <br>
-                        <p><span>Story:</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid iusto a
-                            culpa minus? Hic iste id ipsum nihil incidunt vel porro, placeat odit quidem saepe debitis
-                            sapiente adipisci laudantium nulla.</p>
-                    </div>
-                    <div class="buttons-wrapper">
-                        <a href="#"><i class="fas fa-heart"></i></a>
-                        <a href="#"><i class="fas fa-envelope"></i></a>
+                <div id="default-content">
+                    <div class="column">
+                        <h2>Welcome to the queer
+                            Human Library ! 🏳️‍🌈</h2>
                     </div>
 
+                    <div class="column">
+                        <p>Our library holds the stories of nine different people in the LGBT+ community. 📖<br>
+                            They share their personal stories for others to gain insight in the lives of young queer
+                            people.
+                        </p>
+                    </div>
                 </div>
             </section>
             <section id="grid">
                 <div class="grid-container">
-                    <div class="grid-person">
+                    <div onclick="updateStory('Dino')" class="grid-person">
                         <img src="img/dino-hero.jpg" alt="">
                         <h4>Male Homosexual</h4>
                     </div>
-                    <div class="grid-person">
+                    <div onclick="updateStory('Selena')" class="grid-person">
                         <img src="img/selena-hero.jpg" alt="">
                         <h4>Trans Lesbian</h4>
                     </div>
-                    <div class="grid-person">
+                    <div onclick="updateStory('Linda')" class="grid-person">
                         <img src="img/linda-hero.jpg" alt="">
                         <h4>Homoromantic Bisexual</h4>
                     </div>
-                    <div class="grid-person">
-                        <img src="img/dino-portrait.PNG" alt="">
-                        <h4>Dino</h4>
+                    <div onclick="updateStory('Dino')" class="grid-person">
+                        <img src="img/dino-hero.jpg" alt="">
+                        <h4>Male Homosexual</h4>
                     </div>
-                    <div class="grid-person">
-                        <img src="img/dino-portrait.PNG" alt="">
-                        <h4>Dino</h4>
+                    <div onclick="updateStory('Selena')" class="grid-person">
+                        <img src="img/selena-hero.jpg" alt="">
+                        <h4>Trans Lesbian</h4>
                     </div>
-                    <div class="grid-person">
-                        <img src="img/dino-portrait.PNG" alt="">
-                        <h4>Dino</h4>
+                    <div onclick="updateStory('Linda')" class="grid-person">
+                        <img src="img/linda-hero.jpg" alt="">
+                        <h4>Homoromantic Bisexual</h4>
                     </div>
-                    <div class="grid-person">
-                        <img src="img/dino-portrait.PNG" alt="">
-                        <h4>Dino</h4>
+                    <div onclick="updateStory('Dino')" class="grid-person">
+                        <img src="img/dino-hero.jpg" alt="">
+                        <h4>Male Homosexual</h4>
                     </div>
-                    <div class="grid-person">
-                        <img src="img/dino-portrait.PNG" alt="">
-                        <h4>Dino</h4>
+                    <div onclick="updateStory('Selena')" class="grid-person">
+                        <img src="img/selena-hero.jpg" alt="">
+                        <h4>Trans Lesbian</h4>
                     </div>
-                    <div class="grid-person">
-                        <img src="img/dino-portrait.PNG" alt="">
-                        <h4>Dino</h4>
+                    <div onclick="updateStory('Linda')" class="grid-person">
+                        <img src="img/linda-hero.jpg" alt="">
+                        <h4>Homoromantic Bisexual</h4>
                     </div>
+
                 </div>
             </section>
         </article>
     </main>
     <footer>
-        <p>In Colaboration with LGBT DENMARK</p>
+        <p>In Collaboration with</p>
+        <img src="img/lgbtdk-logo.png" alt="">
     </footer>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
     <script src="js/main.js"></script>
 </body>
 
