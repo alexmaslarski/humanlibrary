@@ -14,6 +14,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storyRef = db.collection("stories");
 let people = [];
+let clickDisabled = false;
 
 let updateStory = name => {
     let htmlTemplate = "";
@@ -21,6 +22,9 @@ let updateStory = name => {
         if (person.name === name) {
             htmlTemplate += markUp(person);
             document.querySelector('#content-display').innerHTML = htmlTemplate;
+                clickDisabled = false;
+                likeBtn(`${person.name}like`);
+
         }
     });
 }
@@ -47,14 +51,14 @@ let markUp = person => `
                         
                     </div>
                     <div class="buttons-wrapper">
-                        <a href="#"><i class="fas fa-heart"></i></a>
+                        <a id="${person.name}like" onclick="likeStory('${person.name}')" href="#"></a>
                         <a onclick="contactBox('${person.name}', '${person.pronoun}')" href="#"><i class="fas fa-envelope"></i></a>
                     </div>
 
                 </div>
     </div>
     `
-let contactBox = (name, pronoun) =>{
+let contactBox = (name, pronoun) => {
     let htmlTemplate = `
     <div class="contact-form">
             <div class="form-heading">
@@ -64,7 +68,7 @@ let contactBox = (name, pronoun) =>{
             </div>
             <p>Would you like to send ${name} a message?
                 Fill in the formula and click ‘Send!’ and ${pronoun} will get right back to you!</p>
-            <form action="mailto:someone@yoursite.com&Subject=Fake%20News&Body=Body-goes-here">
+            <form action="#">
                 <div class="form-group">
 
                     <label for="email">Email</label>
@@ -78,21 +82,85 @@ let contactBox = (name, pronoun) =>{
             <div class="form-buttons">
 
                 <a onclick="hideContact()" href="#">RETURN</a>
-                <input type="submit" value="SEND!">
+                <a onclick="submitForm('${name}')" class="submit" href="#">SEND</a>
+                
             </div>
                 
             
             </form>
         </div>`;
-document.querySelector('#contact-wrapper').innerHTML = htmlTemplate;
+    document.querySelector('#contact-wrapper').innerHTML = htmlTemplate;
 }
-let hideContact = () =>{
+
+let submitForm = name => {
+    let message = document.querySelector('#message').value;
+    open(`mailto:email-to@gmail.com?subject=Human Library&body=${message}`);
+    let htmlTemplate = `
+    <div class="contact-form">
+            <div class="form-heading">
+
+                <i class="fas fa-heart"></i>
+                <h2>THANK YOU!</h2>
+                <p>Your message has been sent to ${name}.</p>
+            </div>
+            <div class="form-buttons centered">
+                <a class="submit" onclick="hideContact()" href="#">RETURN</a>                
+            </div>
+                
+            
+            </form>
+        </div>`;
+    document.querySelector('#contact-wrapper').innerHTML = htmlTemplate;
+
+}
+
+
+let hideContact = () => {
     let htmlTemplate = '';
     document.querySelector('#contact-wrapper').innerHTML = htmlTemplate;
 }
 
 
+
+let likeStory = (name) => {
+    if (clickDisabled === false) {
+
+
+        storyRef.where('name', '==', name).get()
+            .then(function (document) {
+                console.log(document);
+                document.forEach(function (doc) {
+                    console.log(doc);
+                    storyRef.doc(doc.id).update({
+                        likes: doc.data().likes += 1
+                    });
+
+                });
+            });
+            clickDisabled = true;
+            
+            likeBtn(`${name}like`);
+            setTimeout(function () {
+                clickDisabled = false;
+                likeBtn(`${name}like`);
+            }, 6000);
+            
+        
+    }
+    console.log(people);
+}
+let likeBtn = (id) =>{
+    if(clickDisabled){
+
+        document.querySelector(`#${id}`).innerHTML = '<p>Liked</p>';
+
+    }else if(clickDisabled === false){
+        document.querySelector(`#${id}`).innerHTML = '<i class="fas fa-heart"></i>';
+    }
+}
+
 storyRef.onSnapshot((snapshotData) => {
+    people = [];
     snapshotData.forEach(doc => {
         let data = doc.data();
         people.push(data);

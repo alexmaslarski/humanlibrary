@@ -211,7 +211,7 @@ footer p {
   margin-top: 20px;
 }
 
-.contact-form .form-buttons [type=submit],
+.contact-form .form-buttons .submit,
 .contact-form .form-buttons a {
   color: black;
   text-decoration: none;
@@ -224,7 +224,7 @@ footer p {
           box-shadow: 3px 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.contact-form .form-buttons [type=submit] {
+.contact-form .form-buttons .submit {
   background-image: -webkit-gradient(linear, left top, right top, from(#FFDC8D), to(#60FFDA));
   background-image: linear-gradient(90deg, #FFDC8D, #60FFDA);
   border: none;
@@ -232,5 +232,11 @@ footer p {
 
 .contact-form .form-buttons a {
   background-color: #eeeeee;
+}
+
+.contact-form .centered {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 /*# sourceMappingURL=style.css.map */
