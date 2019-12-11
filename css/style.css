@@ -88,9 +88,10 @@ section {
   margin-top: 30px;
 }
 
-#hero-content .buttons-wrapper a {
+#hero-content .buttons-wrapper p {
   color: black;
   text-decoration: none;
+  cursor: pointer;
   padding: 10px 70px;
   border-radius: 50px;
   background-image: -webkit-gradient(linear, left top, right top, from(#FFDC8D), to(#60FFDA));
@@ -101,11 +102,11 @@ section {
           filter: opacity(0.7);
 }
 
-#hero-content .buttons-wrapper a i {
+#hero-content .buttons-wrapper p i {
   font-size: 1.5em;
 }
 
-#hero-content .buttons-wrapper a:hover {
+#hero-content .buttons-wrapper p:hover {
   -webkit-filter: opacity(1);
           filter: opacity(1);
   color: red;
@@ -212,7 +213,7 @@ footer p {
 }
 
 .contact-form .form-buttons .submit,
-.contact-form .form-buttons a {
+.contact-form .form-buttons p {
   color: black;
   text-decoration: none;
   padding: 10px 40px;
@@ -222,6 +223,7 @@ footer p {
   font-weight: 100;
   -webkit-box-shadow: 3px 2px 6px rgba(0, 0, 0, 0.15);
           box-shadow: 3px 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
 }
 
 .contact-form .form-buttons .submit {
@@ -230,7 +232,7 @@ footer p {
   border: none;
 }
 
-.contact-form .form-buttons a {
+.contact-form .form-buttons p {
   background-color: #eeeeee;
 }
 

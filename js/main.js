@@ -1,29 +1,15 @@
-var firebaseConfig = {
-    apiKey: "AIzaSyDCXLU2GcycnU9THs5wffadsf1Ph9rVKPY",
-    authDomain: "humanlibrary-71515.firebaseapp.com",
-    databaseURL: "https://humanlibrary-71515.firebaseio.com",
-    projectId: "humanlibrary-71515",
-    storageBucket: "humanlibrary-71515.appspot.com",
-    messagingSenderId: "801196229241",
-    appId: "1:801196229241:web:d253b6cf41179e48ef4aa8"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+"use strict"
+let people = []; // array containing characters from firebase
+let clickDisabled = false; // boolean that disables and enables the like button
 
-
-const db = firebase.firestore();
-const storyRef = db.collection("stories");
-let people = [];
-let clickDisabled = false;
-
-let updateStory = name => {
+let updateStory = name => { // function called on click on one of the grid elements, gets a name parameter
     let htmlTemplate = "";
-    people.forEach(person => {
+    people.forEach(person => { // cycles through the people array and checks if the names match
         if (person.name === name) {
-            htmlTemplate += markUp(person);
-            document.querySelector('#content-display').innerHTML = htmlTemplate;
-                clickDisabled = false;
-                likeBtn(`${person.name}like`);
+            htmlTemplate += markUp(person); // when they match it calls the markup function which returns the html content
+            document.querySelector('#content-display').innerHTML = htmlTemplate; // appends the htmlTemplate to the #content-display element
+                clickDisabled = false; // enables liking - this happens on every change of the character
+                likeBtn(); // calls a function which displays the like button
 
         }
     });
@@ -51,14 +37,14 @@ let markUp = person => `
                         
                     </div>
                     <div class="buttons-wrapper">
-                        <a id="${person.name}like" onclick="likeStory('${person.name}')" href="#"></a>
-                        <a onclick="contactBox('${person.name}', '${person.pronoun}')" href="#"><i class="fas fa-envelope"></i></a>
+                        <p id="likeBtn" onclick="likeStory('${person.name}')"></p>
+                        <p onclick="contactBox('${person.name}', '${person.pronoun}')" ><i class="fas fa-envelope"></i></p>
                     </div>
 
                 </div>
     </div>
     `
-let contactBox = (name, pronoun) => {
+let contactBox = (name, pronoun) => { // creates the template for the contact box using the name and pronoun of the current character
     let htmlTemplate = `
     <div class="contact-form">
             <div class="form-heading">
@@ -81,8 +67,8 @@ let contactBox = (name, pronoun) => {
             </div>
             <div class="form-buttons">
 
-                <a onclick="hideContact()" href="#">RETURN</a>
-                <a onclick="submitForm('${name}')" class="submit" href="#">SEND</a>
+                <p onclick="hideContact()" href="#">RETURN</p>
+                <p onclick="submitForm('${name}')" class="submit" href="#">SEND</p>
                 
             </div>
                 
@@ -94,7 +80,8 @@ let contactBox = (name, pronoun) => {
 
 let submitForm = name => {
     let message = document.querySelector('#message').value;
-    open(`mailto:email-to@gmail.com?subject=Human Library&body=${message}`);
+    open(`mailto:character@gmail.com?subject=Human Library&body=${message}`); // opens the default email client with a link pointing to the character's email
+    //containing the body of the message already written in the contact box
     let htmlTemplate = `
     <div class="contact-form">
             <div class="form-heading">
@@ -104,7 +91,7 @@ let submitForm = name => {
                 <p>Your message has been sent to ${name}.</p>
             </div>
             <div class="form-buttons centered">
-                <a class="submit" onclick="hideContact()" href="#">RETURN</a>                
+                <p class="submit" onclick="hideContact()" href="#">RETURN</p>                
             </div>
                 
             
@@ -123,43 +110,38 @@ let hideContact = () => {
 
 
 let likeStory = (name) => {
-    if (clickDisabled === false) {
-
-
-        storyRef.where('name', '==', name).get()
+    if (clickDisabled === false) { // if the liking is enabled
+        storyRef.where('name', '==', name).get() // finds the document containing the name of the selected character
             .then(function (document) {
-                console.log(document);
-                document.forEach(function (doc) {
-                    console.log(doc);
-                    storyRef.doc(doc.id).update({
-                        likes: doc.data().likes += 1
+                document.forEach(function (doc) { // then loops through the documents ( it's only one element but this way we get access to the document itself)
+                    storyRef.doc(doc.id).update({ // we update the document with the character's ID (we need ID to select the doc in order to use update())
+                        likes: doc.data().likes += 1 // and increment his current likes by 1
                     });
 
                 });
             });
-            clickDisabled = true;
-            
-            likeBtn(`${name}like`);
-            setTimeout(function () {
+            clickDisabled = true;// then we disable liking
+            likeBtn(); // call the likebtn function to change the button
+            setTimeout(function () { // after some time we enable liking and change the button back
                 clickDisabled = false;
-                likeBtn(`${name}like`);
+                likeBtn();
             }, 6000);
             
         
     }
     console.log(people);
 }
-let likeBtn = (id) =>{
+let likeBtn = () =>{
     if(clickDisabled){
 
-        document.querySelector(`#${id}`).innerHTML = '<p>Liked</p>';
+        document.querySelector(`#likeBtn`).innerHTML = 'Liked';
 
     }else if(clickDisabled === false){
-        document.querySelector(`#${id}`).innerHTML = '<i class="fas fa-heart"></i>';
+        document.querySelector(`#likeBtn`).innerHTML = '<i class="fas fa-heart"></i>';
     }
 }
 
-storyRef.onSnapshot((snapshotData) => {
+storyRef.onSnapshot((snapshotData) => { // updates the people array on every change in firebase
     people = [];
     snapshotData.forEach(doc => {
         let data = doc.data();
