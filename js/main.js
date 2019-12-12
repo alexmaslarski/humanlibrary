@@ -117,7 +117,6 @@ let likeStory = (name) => {
                     storyRef.doc(doc.id).update({ // we update the document with the character's ID (we need ID to select the doc in order to use update())
                         likes: doc.data().likes += 1 // and increment his current likes by 1
                     });
-
                 });
             });
             clickDisabled = true;// then we disable liking
@@ -126,16 +125,11 @@ let likeStory = (name) => {
                 clickDisabled = false;
                 likeBtn();
             }, 6000);
-            
-        
     }
-    console.log(people);
 }
 let likeBtn = () =>{
     if(clickDisabled){
-
         document.querySelector(`#likeBtn`).innerHTML = 'Liked';
-
     }else if(clickDisabled === false){
         document.querySelector(`#likeBtn`).innerHTML = '<i class="fas fa-heart"></i>';
     }
