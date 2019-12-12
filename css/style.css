@@ -67,6 +67,13 @@ section {
   width: 80%;
 }
 
+#hero-image #homeBtn {
+  text-align: left;
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: #707070;
+}
+
 #hero-content h2 {
   font-weight: 100;
   font-size: 2em;
@@ -194,7 +201,8 @@ footer p {
   margin-bottom: 5px;
 }
 
-.contact-form .form-group input, .contact-form .form-group textarea {
+.contact-form .form-group input,
+.contact-form .form-group textarea {
   padding: 5px;
   width: 100%;
   -webkit-box-shadow: 3px 2px 6px rgba(0, 0, 0, 0.15);

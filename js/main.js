@@ -15,11 +15,36 @@ let updateStory = name => { // function called on click on one of the grid eleme
     });
 }
 
+let goHome = () =>{
+    let htmlTemplate = `
+    <div id="banner">
+
+                    <img src="img/default-banner.jpg" alt="LGBT people celebrating">
+                </div>
+                <div id="default-content">
+                    <div class="column">
+                        <h2>Welcome to the queer
+                            Human Library ! 🏳️‍🌈</h2>
+                    </div>
+
+                    <div class="column">
+                        <p>Our library holds the stories of nine different people in the LGBT+ community. 📖<br>
+                            They share their personal stories for others to gain insight in the lives of young queer
+                            people.
+                        </p>
+                    </div>
+                </div>
+    `;
+    document.querySelector('#content-display').innerHTML = htmlTemplate;
+
+}
+
+
 let markUp = person => `
 <div class="flex">
     <div id="hero-image">
-
-                    <img src="img/${person.img}" style="box-shadow: -20px 20px 0px ${person.shadow}" alt="">
+    <p id="homeBtn" onclick="goHome()"><i class="fas fa-arrow-left"></i></p>
+                    <img src="img/${person.img}" style="box-shadow: -20px 20px 0px ${person.shadow}" alt="Character image">
                 </div>
                 <div id="hero-content">
                     <h2>${person.title}</h2>
